@@ -5,10 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Cihan Okuyor</title>
 
-<!-- Telefon / ana ekran uygulaması ayarları -->
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#151513" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ece5d6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16140f" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Cihan Okuyor">
@@ -16,247 +15,536 @@
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="icons/icon-192.png">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+
 <style>
   :root {
-    --bg: #faf9f6;
-    --card: #ffffff;
-    --text: #1f1f1f;
-    --muted: #8a8780;
-    --line: #e8e5de;
-    --accent: #1f1f1f;
-    --on-accent: #faf9f6;
-    --dot-off-sel: rgba(255,255,255,.28);
+    --paper: #ece5d6;
+    --card: #f7f2e8;
+    --ink: #1a1814;
+    --ink-2: #4a443a;
+    --muted: #857c6d;
+    --line: #d3c9b5;
+    --orange: #ee5a24;
+    --forest: #233a30;
+    --on-ink: #f7f2e8;
+    --cover-text: #fbf7ef;
 
-    --red: #d14b4b;    --red-bg: #fbeeee;
-    --yellow: #c99a06; --yellow-bg: #fdf6dc;
-    --green: #2e9459;  --green-bg: #e7f5ec;
+    --red: #d64c35;    --red-bg: #f3d3c8;
+    --yellow: #e2a72e; --yellow-bg: #f4e3b8;
+    --green: #4f8a55;  --green-bg: #d6e3cc;
+
+    --sp-red: #f08066; --sp-yellow: #f2c35a; --sp-green: #9fcb8c;
+
+    --t1: #f0c5b6; --t2: #9fcbc7; --t3: #a9ba94; --t4: #efd99a;
+
+    --serif: "Fraunces", Georgia, "Times New Roman", serif;
+    --read: "Newsreader", Georgia, serif;
+    --hand: "Caveat", "Segoe Print", cursive;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #151513;
-      --card: #1e1e1b;
-      --text: #ecebe6;
-      --muted: #8d8b84;
-      --line: #2f2e2a;
-      --accent: #ecebe6;
-      --on-accent: #151513;
-      --dot-off-sel: rgba(0,0,0,.22);
+      --paper: #16140f;
+      --card: #211e18;
+      --ink: #efe7d8;
+      --ink-2: #c8bfae;
+      --muted: #8f8676;
+      --line: #383328;
+      --orange: #f26a36;
+      --forest: #1d3028;
+      --on-ink: #16140f;
+      --cover-text: #16140f;
 
-      --red: #e06666;    --red-bg: #352121;
-      --yellow: #e5bb3a; --yellow-bg: #35301a;
-      --green: #4cb878;  --green-bg: #1c3125;
+      --red: #ec7a62;    --red-bg: #3b231d;
+      --yellow: #eebb4c; --yellow-bg: #3a301b;
+      --green: #8cc07c;  --green-bg: #213020;
+
+      --t1: #4b322a; --t2: #26403e; --t3: #333d29; --t4: #463c22;
     }
   }
 
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font: 16px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    margin: 0; background: var(--paper); color: var(--ink);
+    font: 16px/1.45 var(--sans);
     -webkit-font-smoothing: antialiased;
     -webkit-tap-highlight-color: transparent;
     overscroll-behavior-y: none;
   }
-  button, input { font: inherit; color: inherit; }
-  button { cursor: pointer; touch-action: manipulation; }
-  button:active { opacity: .75; }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  button { cursor: pointer; touch-action: manipulation; background: none; border: none; padding: 0; }
+  button:active { transform: scale(.97); }
+  :focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+  svg { display: block; }
 
-  /* ---------- Üst kısım (sabit) ---------- */
-  .top-wrap {
-    position: sticky; top: 0; z-index: 5;
-    background: var(--bg);
-    padding-top: env(safe-area-inset-top);
-    border-bottom: 1px solid var(--line);
-  }
-  .inner { max-width: 560px; margin: 0 auto; }
-  .top {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 10px 8px 0 16px;
-  }
-  .brand { font-family: Georgia, "Times New Roman", serif; font-size: 23px; letter-spacing: -.3px; }
-  .top-right { display: flex; align-items: center; }
-  .yearnav { display: flex; align-items: center; }
-  .yearnav span { font-weight: 600; font-variant-numeric: tabular-nums; min-width: 46px; text-align: center; }
-  .icon-btn {
-    width: 40px; height: 40px; border: none; background: none;
-    border-radius: 50%; font-size: 22px; line-height: 1;
-    display: inline-flex; align-items: center; justify-content: center;
-  }
-
-  .yearsum {
-    display: flex; align-items: center; gap: 12px;
-    padding: 4px 16px 0; font-size: 13px; color: var(--muted);
-  }
-  .yearsum b { color: var(--text); font-weight: 600; }
-  .bar { flex: 1; height: 5px; background: var(--line); border-radius: 3px; overflow: hidden; }
-  .bar span { display: block; height: 100%; background: var(--green); transition: width .3s; }
-
-  .months {
-    display: flex; gap: 6px; overflow-x: auto;
-    padding: 12px 16px 12px;
-    scrollbar-width: none; -webkit-overflow-scrolling: touch;
-  }
-  .months::-webkit-scrollbar { display: none; }
-  .mchip {
-    flex: 0 0 auto; width: 54px; padding: 8px 0 8px;
-    border-radius: 12px; border: 1px solid var(--line); background: var(--card);
-    display: flex; flex-direction: column; align-items: center; gap: 6px;
-    font-size: 13.5px;
-  }
-  .mchip.now { border-color: var(--muted); font-weight: 600; }
-  .mchip.sel { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
-  .dots { display: flex; gap: 3px; }
-  .dots i { width: 5px; height: 5px; border-radius: 50%; background: var(--line); }
-  .mchip.sel .dots i { background: var(--dot-off-sel); }
-  .dots i.on, .mchip.sel .dots i.on { background: var(--green); }
-
-  /* ---------- Ay ekranı ---------- */
-  main {
+  /* ================= Ekranlar ================= */
+  .screen {
+    display: none;
     max-width: 560px; margin: 0 auto;
-    padding: 22px 16px calc(110px + env(safe-area-inset-bottom));
-    min-height: 70vh;
+    padding: calc(env(safe-area-inset-top) + 18px) 18px calc(130px + env(safe-area-inset-bottom));
   }
-  .m-title { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 18px; }
-  .m-title h1 { font-family: Georgia, "Times New Roman", serif; font-weight: normal; font-size: 34px; line-height: 1.1; margin: 0; }
-  .m-title h1 small { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 15px; color: var(--muted); margin-left: 6px; }
-  .goal { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); padding-bottom: 4px; }
-  .goal .dots i { width: 8px; height: 8px; }
+  .screen.on { display: block; animation: gir .25s ease; }
+  @keyframes gir { from { opacity: 0; } to { opacity: 1; } }
+
+  .hd { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin: 4px 2px 18px; }
+  .brand {
+    font-family: var(--serif); font-size: 31px; font-weight: 600;
+    letter-spacing: -.02em; line-height: 1.02;
+    font-variation-settings: "opsz" 144;
+  }
+  .hand { font-family: var(--hand); color: var(--orange); font-size: 23px; line-height: 1; display: inline-block; transform: rotate(-2deg); margin-top: 4px; }
+  .round {
+    width: 44px; height: 44px; border-radius: 50%; flex: 0 0 auto;
+    background: var(--ink); color: var(--on-ink);
+    display: grid; place-items: center;
+  }
+
+  /* ---------- Raf kartı ---------- */
+  .shelfcard {
+    background: var(--forest); color: #f3ecdd;
+    border: 1.5px solid var(--ink); border-radius: 28px;
+    padding: 14px 14px 12px;
+  }
+  .sc-top { display: flex; align-items: center; justify-content: space-between; padding: 0 2px; }
+  .sc-year { font-family: var(--serif); font-size: 44px; line-height: 1; font-weight: 400; letter-spacing: -.02em; font-variant-numeric: lining-nums; }
+  .sc-nav { display: flex; gap: 6px; }
+  .sc-nav button { width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid rgba(243,236,221,.35); color: inherit; display: grid; place-items: center; }
+  .sc-count { font-family: var(--hand); font-size: 24px; color: #f6a77f; margin: 2px 2px 0; }
+  .shelf { display: flex; margin-top: 10px; }
+  .grp { flex: 1; display: flex; flex-direction: column; align-items: stretch; padding-top: 4px; border-radius: 10px 10px 0 0; color: inherit; }
+  .grp .sp {
+    display: flex; align-items: flex-end; justify-content: center; gap: 2px;
+    height: 62px; border-bottom: 3px solid #e9dfca;
+  }
+  .grp i { width: 7px; border-radius: 2px 2px 0 0; display: block; }
+  .grp i.unread  { background: var(--sp-red); }
+  .grp i.reading { background: var(--sp-yellow); }
+  .grp i.done    { background: var(--sp-green); }
+  .grp i.bos   { background: transparent; box-shadow: inset 0 0 0 1px rgba(243,236,221,.28); border-radius: 2px 2px 0 0; }
+  .grp small { font-family: var(--serif); font-size: 12px; text-align: center; padding: 5px 0 2px; opacity: .55; }
+  .grp.now small { opacity: .9; }
+  .grp.sel { background: rgba(243,236,221,.09); }
+  .grp.sel small { opacity: 1; color: #f6a77f; font-weight: 700; }
+
+  /* ---------- Ay başlığı ---------- */
+  .mhead { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; margin: 26px 2px 14px; }
+  .mhead h1 { font-family: var(--serif); font-weight: 400; font-size: 48px; line-height: .95; margin: 0; letter-spacing: -.025em; }
+  .mhead .hand { font-size: 21px; margin: 6px 0 0 2px; }
+  .goal { display: flex; align-items: center; gap: 8px; font-family: var(--serif); font-size: 15px; color: var(--ink-2); padding-bottom: 6px; white-space: nowrap; }
+  .gdots { display: flex; gap: 4px; }
+  .gdots i { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--ink-2); }
+  .gdots i.on { background: var(--green); border-color: var(--green); }
   .goal.ok { color: var(--green); font-weight: 600; }
 
-  .books { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-  .book { border-radius: 16px; padding: 12px 12px 12px 16px; border-left: 4px solid; }
-  .s-unread  { background: var(--red-bg);    border-color: var(--red); }
-  .s-reading { background: var(--yellow-bg); border-color: var(--yellow); }
-  .s-done    { background: var(--green-bg);  border-color: var(--green); }
+  /* ---------- Kitap kartları ---------- */
+  .books { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+  .book {
+    position: relative; display: flex; gap: 14px;
+    padding: 14px; border-radius: 22px;
+    border: 1.5px solid var(--ink);
+  }
+  .book.s-unread  { background: var(--red-bg); }
+  .book.s-reading { background: var(--yellow-bg); }
+  .book.s-done    { background: var(--green-bg); }
+  .cover {
+    flex: 0 0 64px; height: 94px; border-radius: 3px 9px 9px 3px;
+    border: 1.5px solid var(--ink);
+    color: var(--cover-text); padding: 9px 7px 9px 12px;
+    font-family: var(--serif); font-size: 27px; line-height: 1; font-weight: 600; font-style: italic;
+    letter-spacing: -.02em;
+    display: flex; flex-direction: column; justify-content: space-between;
+    overflow: hidden;
+    box-shadow: inset 4px 0 0 rgba(0,0,0,.16);
+  }
+  .s-unread  .cover { background: var(--red); }
+  .s-reading .cover { background: var(--yellow); }
+  .s-done    .cover { background: var(--green); }
+  .cover em { display: block; width: 22px; height: 2px; background: currentColor; opacity: .85; }
+  .cover em + em { width: 14px; margin-top: 4px; }
 
-  .b-top { display: flex; gap: 8px; align-items: flex-start; }
-  .b-info { flex: 1; min-width: 0; padding-top: 2px; }
-  .b-label { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-  .s-unread .b-label  { color: var(--red); }
-  .s-reading .b-label { color: var(--yellow); }
-  .s-done .b-label    { color: var(--green); }
-  .b-title { font-size: 17px; font-weight: 600; margin-top: 2px; word-break: break-word; }
-  .b-author { font-size: 14px; color: var(--muted); }
-  .more { width: 36px; height: 36px; border: none; background: none; border-radius: 50%; font-size: 20px; color: var(--muted); flex: 0 0 auto; }
-
-  .b-actions { display: flex; gap: 8px; margin-top: 12px; }
+  .b-body { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .b-status { font-family: var(--read); font-style: italic; font-size: 14px; display: flex; align-items: center; gap: 6px; }
+  .b-status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+  .s-unread  .b-status { color: var(--red); }
+  .s-reading .b-status { color: #a8740f; }
+  .s-done    .b-status { color: var(--green); }
+  @media (prefers-color-scheme: dark) { .s-reading .b-status { color: var(--yellow); } }
+  .b-title { font-family: var(--serif); font-size: 19px; font-weight: 600; line-height: 1.15; margin-top: 2px; padding-right: 30px; word-break: break-word; }
+  .b-author { font-family: var(--read); font-style: italic; font-size: 15.5px; color: var(--ink-2); }
+  .b-notes { align-self: flex-start; margin-top: 6px; font-family: var(--hand); font-size: 19px; color: var(--ink-2); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  .b-actions { display: flex; gap: 8px; margin-top: auto; padding-top: 12px; }
   .b-actions button {
-    flex: 1; height: 44px; border-radius: 12px;
-    border: 1px solid var(--line); background: var(--card);
-    font-size: 15px; font-weight: 500;
+    flex: 1; height: 42px; border-radius: 999px;
+    border: 1.5px solid var(--ink); background: var(--card);
+    font-size: 14.5px; font-weight: 600;
   }
-  .b-actions button[data-act="reading"].on { background: var(--yellow); border-color: var(--yellow); color: #fff; }
-  .b-actions button[data-act="done"].on    { background: var(--green);  border-color: var(--green);  color: #fff; }
-  @media (prefers-color-scheme: dark) {
-    .b-actions button.on { color: #151513 !important; }
+  .b-actions button[data-act="reading"].on { background: var(--yellow); color: var(--cover-text); }
+  .b-actions button[data-act="done"].on    { background: var(--green);  color: var(--cover-text); }
+  .more { position: absolute; top: 8px; right: 8px; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; color: var(--ink-2); }
+
+  /* ---------- Boş durum ---------- */
+  .empty { text-align: center; padding: 6px 12px 10px; }
+  .empty .illus { width: 210px; margin: 0 auto 6px; }
+  .empty p { font-family: var(--read); font-size: 17.5px; color: var(--ink-2); margin: 0 auto; max-width: 30ch; }
+
+  /* ================= Defter ================= */
+  .seg { display: flex; gap: 6px; margin: 0 0 16px; flex-wrap: wrap; }
+  .seg button {
+    height: 38px; padding: 0 16px; border-radius: 999px;
+    border: 1.5px solid var(--ink); font-size: 14.5px; font-weight: 500;
+  }
+  .seg button.on { background: var(--ink); color: var(--on-ink); }
+  .kfiltre {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    background: var(--t4); border: 1.5px solid var(--ink); border-radius: 16px;
+    padding: 10px 8px 10px 14px; margin-bottom: 14px;
+    font-family: var(--read); font-size: 15.5px;
+  }
+  .kfiltre b { font-family: var(--serif); font-weight: 600; }
+  .kfiltre button { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; }
+
+  .notes { display: flex; flex-direction: column; gap: 12px; }
+  .note {
+    display: block; width: 100%; text-align: left;
+    background: var(--card); border: 1.5px solid var(--ink); border-radius: 22px;
+    padding: 16px 18px 15px;
+    background-image: linear-gradient(to right, transparent 26px, rgba(238,90,36,.35) 26px, rgba(238,90,36,.35) 27px, transparent 27px);
+    padding-left: 40px;
+  }
+  .n-date { font-family: var(--read); font-style: italic; font-size: 14px; color: var(--muted); }
+  .n-title { font-family: var(--serif); font-size: 21px; font-weight: 600; line-height: 1.18; margin: 3px 0 5px; word-break: break-word; }
+  .n-title.untitled { font-weight: 400; font-style: italic; color: var(--ink-2); }
+  .n-ex { font-family: var(--read); font-size: 16.5px; line-height: 1.5; color: var(--ink-2); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word; }
+  .n-foot { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 11px; }
+  .chip { font-size: 13px; padding: 3px 11px; border-radius: 999px; border: 1.2px solid var(--ink-2); color: var(--ink-2); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .chip.pub { background: var(--orange); border-color: var(--orange); color: #fff; }
+
+  /* ================= Blog ================= */
+  .mast { border: 1.5px solid var(--ink); border-radius: 26px; overflow: hidden; background: var(--t2); margin-bottom: 22px; }
+  .mast-top { display: flex; align-items: center; justify-content: space-between; padding: 12px 12px 12px 18px; }
+  .mast-top b { font-family: var(--serif); font-weight: 700; font-size: 21px; letter-spacing: -.01em; }
+  .mast-top .round { width: 40px; height: 40px; }
+  .mast-line {
+    border-top: 1.5px solid var(--ink); padding: 9px 18px;
+    font-family: var(--serif); font-weight: 600; font-size: 14px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .mast-body { border-top: 1.5px solid var(--ink); padding: 18px 18px 20px; }
+  .mast-body h2 { font-family: var(--serif); font-weight: 400; font-size: 34px; line-height: 1.04; letter-spacing: -.02em; margin: 0; }
+  .mast-body .hand { font-size: 24px; margin-top: 8px; color: var(--ink); }
+
+  .post {
+    display: block; width: 100%; text-align: left;
+    border: 1.5px solid var(--ink); border-radius: 24px;
+    padding: 18px 18px 16px; margin-bottom: 14px;
+  }
+  .p-date { font-family: var(--read); font-style: italic; font-size: 14.5px; }
+  .p-title { font-family: var(--serif); font-size: 24px; font-weight: 600; line-height: 1.14; margin: 5px 0 8px; letter-spacing: -.01em; word-break: break-word; }
+  .post.feat .p-title { font-size: 31px; }
+  .p-ex { font-family: var(--read); font-size: 16.5px; line-height: 1.52; color: var(--ink-2); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word; }
+  .p-book { font-family: var(--read); font-size: 14.5px; margin-top: 12px; padding-top: 10px; border-top: 1.2px solid rgba(26,24,20,.25); }
+  @media (prefers-color-scheme: dark) { .p-book { border-top-color: rgba(239,231,216,.2); } }
+  .count { font-family: var(--serif); font-size: 15px; color: var(--ink-2); margin: 0 2px 12px; }
+
+  /* ================= Alt menü ================= */
+  .dock {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+    display: flex; justify-content: center; align-items: center; gap: 10px;
+    padding: 28px 16px calc(14px + env(safe-area-inset-bottom));
+    background: linear-gradient(to top, var(--paper) 48%, transparent);
+    pointer-events: none;
+  }
+  .dock > * { pointer-events: auto; }
+  .tabs { display: flex; gap: 2px; padding: 5px; background: var(--card); border: 1.5px solid var(--ink); border-radius: 999px; }
+  .tab {
+    height: 48px; min-width: 48px; padding: 0 13px; border-radius: 999px;
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+    color: var(--ink-2); font-size: 15px; font-weight: 600;
+  }
+  .tab span { display: none; }
+  .tab.on { background: var(--ink); color: var(--on-ink); padding: 0 16px 0 13px; }
+  .tab.on span { display: inline; }
+  .fab {
+    width: 60px; height: 60px; border-radius: 50%;
+    background: var(--orange); color: #fff; border: 1.5px solid var(--ink);
+    display: grid; place-items: center;
   }
 
-  .empty { text-align: center; color: var(--muted); padding: 48px 20px; }
-  .empty .big { font-size: 36px; margin-bottom: 8px; }
-
-  .fade { animation: fade .22s ease; }
-  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-
-  /* ---------- Alttaki ekle butonu ---------- */
-  .addbar {
-    position: fixed; left: 0; right: 0; bottom: 0; z-index: 4;
-    padding: 18px 16px calc(14px + env(safe-area-inset-bottom));
-    background: linear-gradient(to top, var(--bg) 65%, transparent);
+  /* ================= Tam ekran katmanlar ================= */
+  .ov {
+    position: fixed; inset: 0; z-index: 30;
+    background: var(--paper); overflow-y: auto; -webkit-overflow-scrolling: touch;
+    transform: translateX(104%); transition: transform .3s cubic-bezier(.2,.8,.2,1);
+    visibility: hidden;
   }
-  .addbar button {
-    display: block; width: 100%; max-width: 528px; margin: 0 auto;
-    height: 54px; border-radius: 16px; border: none;
-    background: var(--accent); color: var(--on-accent);
-    font-size: 16px; font-weight: 600;
-  }
+  .ov.open { transform: none; visibility: visible; }
+  #editor { z-index: 32; }
 
-  /* ---------- Alt sayfa (sheet) ---------- */
-  .backdrop {
-    position: fixed; inset: 0; z-index: 20;
-    background: rgba(0,0,0,.35);
-    opacity: 0; pointer-events: none; transition: opacity .2s;
+  /* Yazı okuma */
+  .art {
+    max-width: 560px; margin: calc(env(safe-area-inset-top) + 12px) auto 28px;
+    border: 1.5px solid var(--ink); border-radius: 28px; overflow: hidden;
+    margin-left: max(12px, calc((100% - 560px) / 2)); margin-right: max(12px, calc((100% - 560px) / 2));
   }
+  .art-top { display: flex; align-items: center; justify-content: space-between; padding: 12px 12px 12px 18px; }
+  .art-top b { font-family: var(--serif); font-weight: 700; font-size: 19px; }
+  .art-top .round { width: 40px; height: 40px; }
+  .art-line { border-top: 1.5px solid var(--ink); border-bottom: 1.5px solid var(--ink); padding: 9px 18px; font-family: var(--serif); font-weight: 600; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .art-in { padding: 6px 22px 26px; }
+  .back { display: inline-flex; align-items: center; gap: 10px; font-family: var(--serif); font-weight: 600; font-size: 16px; padding: 12px 0 10px; }
+  .back i { width: 40px; height: 40px; border: 1.5px solid var(--ink); border-radius: 50%; display: grid; place-items: center; font-style: normal; }
+  .art h1 { font-family: var(--serif); font-size: 33px; font-weight: 600; line-height: 1.1; letter-spacing: -.015em; margin: 8px 0 8px; word-break: break-word; }
+  .art-date { font-family: var(--read); font-style: italic; font-size: 15px; margin-bottom: 18px; }
+  .art-text p { font-family: var(--read); font-size: 19px; line-height: 1.62; margin: 0 0 1em; word-break: break-word; }
+  .art-text p:first-child::first-letter {
+    font-family: var(--serif); font-weight: 600; font-size: 68px; line-height: .8;
+    float: left; padding: 7px 10px 0 0;
+  }
+  .art-book { font-family: var(--read); font-size: 16px; border-top: 1.5px solid var(--ink); padding: 14px 22px; }
+  .art-foot { border-top: 1.5px solid var(--ink); padding: 12px 14px; display: flex; justify-content: flex-end; }
+  .art-foot button { height: 42px; padding: 0 18px; border-radius: 999px; border: 1.5px solid var(--ink); font-weight: 600; font-size: 14.5px; }
+
+  /* Not yazma */
+  .ed-bar {
+    position: sticky; top: 0; z-index: 2;
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    padding: calc(env(safe-area-inset-top) + 10px) 14px 10px;
+    background: var(--paper);
+  }
+  .ed-bar .back { padding: 0; }
+  .ed-right { display: flex; align-items: center; gap: 6px; }
+  .ed-del { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; color: var(--red); }
+  .ed-done { height: 42px; padding: 0 20px; border-radius: 999px; background: var(--ink); color: var(--on-ink); font-weight: 600; font-size: 15px; }
+  .ed-wrap { max-width: 560px; margin: 0 auto; padding: 4px 22px calc(60px + env(safe-area-inset-bottom)); }
+  .ed-date { font-family: var(--read); font-style: italic; font-size: 14.5px; color: var(--muted); }
+  .ed-title {
+    width: 100%; border: none; background: none; outline: none;
+    font-family: var(--serif); font-size: 30px; font-weight: 600; line-height: 1.15;
+    letter-spacing: -.015em; padding: 4px 0 6px;
+    resize: none; overflow: hidden; display: block;
+  }
+  .ed-title::placeholder { color: var(--muted); font-weight: 400; font-style: italic; }
+  .ed-meta { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 18px; }
+  .ed-select {
+    -webkit-appearance: none; appearance: none;
+    height: 38px; max-width: 100%; padding: 0 34px 0 14px; border-radius: 999px;
+    border: 1.5px solid var(--ink); background: var(--card);
+    font-size: 14.5px; text-overflow: ellipsis;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23857c6d' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 13px center;
+  }
+  .pub-toggle {
+    height: 38px; padding: 0 14px 0 8px; border-radius: 999px;
+    border: 1.5px solid var(--ink); display: inline-flex; align-items: center; gap: 8px;
+    font-size: 14.5px; font-weight: 500;
+  }
+  .pub-toggle .sw { width: 34px; height: 22px; border-radius: 999px; background: var(--line); position: relative; transition: background .2s; }
+  .pub-toggle .sw::after { content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--card); transition: transform .2s; }
+  .pub-toggle.on { background: var(--orange); color: #fff; border-color: var(--orange); }
+  .pub-toggle.on .sw { background: rgba(255,255,255,.35); }
+  .pub-toggle.on .sw::after { transform: translateX(12px); background: #fff; }
+  .ed-body {
+    display: block; width: 100%; min-height: 55vh; border: none; outline: none; resize: none; padding: 0;
+    font-family: var(--read); font-size: 19px; line-height: 34px;
+    background: transparent repeating-linear-gradient(to bottom, transparent 0 33px, var(--line) 33px 34px);
+    background-attachment: local;
+  }
+  .ed-body::placeholder { color: var(--muted); font-style: italic; }
+  .ed-count { font-family: var(--read); font-style: italic; font-size: 14px; color: var(--muted); margin-top: 10px; }
+
+  /* ================= Alt pencere ================= */
+  .backdrop { position: fixed; inset: 0; z-index: 40; background: rgba(20,18,14,.4); opacity: 0; pointer-events: none; transition: opacity .2s; }
   .backdrop.open { opacity: 1; pointer-events: auto; }
   .sheet {
-    position: fixed; left: 0; right: 0; bottom: 0; z-index: 21;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 41;
     max-width: 560px; margin: 0 auto;
-    background: var(--card); border-radius: 22px 22px 0 0;
-    padding: 8px 16px calc(16px + env(safe-area-inset-bottom));
-    transform: translateY(105%); transition: transform .25s ease;
+    background: var(--card); border: 1.5px solid var(--ink); border-bottom: none;
+    border-radius: 28px 28px 0 0;
+    padding: 8px 18px calc(18px + env(safe-area-inset-bottom));
+    transform: translateY(105%); transition: transform .26s ease, visibility 0s .26s;
+    visibility: hidden;
   }
-  .sheet.open { transform: none; }
-  .grab { width: 38px; height: 5px; border-radius: 3px; background: var(--line); margin: 4px auto 16px; }
-  .sheet h3 { margin: 0 0 4px; font-size: 19px; }
-  .sheet .hint { color: var(--muted); font-size: 14px; margin: 0 0 14px; }
+  .sheet.open { transform: none; visibility: visible; transition: transform .26s ease; }
+  .grab { width: 40px; height: 5px; border-radius: 3px; background: var(--line); margin: 4px auto 16px; }
+  .sheet h3 { font-family: var(--serif); font-size: 23px; font-weight: 600; margin: 0 0 2px; line-height: 1.15; word-break: break-word; }
+  .sheet .hint { font-family: var(--read); font-style: italic; color: var(--muted); font-size: 15px; margin: 0 0 14px; }
   .sheet input {
-    width: 100%; height: 50px; padding: 0 14px; font-size: 16px;
-    border: 1px solid var(--line); border-radius: 12px; background: var(--bg);
+    width: 100%; height: 52px; padding: 0 16px; font-size: 16.5px;
+    border: 1.5px solid var(--line); border-radius: 14px; background: var(--paper);
     margin-bottom: 10px; outline: none; -webkit-appearance: none;
   }
-  .sheet input:focus { border-color: var(--muted); }
-  .sbtn {
-    display: block; width: 100%; height: 52px; margin-top: 8px;
-    border-radius: 14px; border: 1px solid var(--line); background: var(--card);
-    font-size: 16px; font-weight: 500;
-  }
-  .sbtn.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); font-weight: 600; }
-  .sbtn.danger { color: var(--red); }
+  .sheet input[name="baslik"] { font-family: var(--serif); font-size: 18px; }
+  .sheet input:focus { border-color: var(--ink); }
+  .sbtn { display: block; width: 100%; height: 52px; margin-top: 8px; border-radius: 16px; border: 1.5px solid var(--ink); font-size: 16px; font-weight: 500; }
+  .sbtn.primary { background: var(--ink); color: var(--on-ink); font-weight: 600; }
+  .sbtn.danger { color: var(--red); border-color: var(--red); }
   .sbtn.plain { border: none; color: var(--muted); }
-  .note { text-align: center; color: var(--muted); font-size: 13px; margin: 14px 0 2px; }
+
+  /* ================= Karşılama ================= */
+  #welcome {
+    position: fixed; inset: 0; z-index: 60; background: var(--paper);
+    overflow-y: auto; display: none;
+  }
+  #welcome.open { display: block; }
+  .w-in { max-width: 480px; margin: 0 auto; min-height: 100%; display: flex; flex-direction: column; padding: calc(env(safe-area-inset-top) + 26px) 26px calc(26px + env(safe-area-inset-bottom)); }
+  .w-note { font-family: var(--hand); font-size: 26px; line-height: 1.05; transform: rotate(-7deg); transform-origin: left; width: 9.5em; margin: 6px 0 0 4px; }
+  .w-note::after { content: ""; display: block; width: 70px; height: 2.5px; background: var(--ink); margin-top: 8px; border-radius: 2px; }
+  .w-in .illus { width: 100%; max-width: 360px; margin: 6px auto 0; }
+  .w-in h2 { font-family: var(--serif); font-weight: 700; font-size: 50px; line-height: .95; letter-spacing: -.03em; margin: 18px 0 0; font-variation-settings: "opsz" 144; }
+  .w-hand { font-family: var(--hand); color: var(--orange); font-size: 38px; line-height: 1.1; }
+  .w-hand svg { width: 230px; margin-top: -2px; }
+  .w-in p { font-family: var(--read); font-size: 18px; color: var(--ink-2); line-height: 1.5; margin: 14px 0 26px; }
+  .w-btn {
+    margin-top: auto; height: 62px; width: 100%; border-radius: 8px;
+    background: var(--ink); color: var(--on-ink);
+    font-family: var(--hand); font-size: 30px; font-weight: 700;
+  }
+
+  /* İllüstrasyon renkleri (karanlık modda çizgiler açılır) */
+  .illus .stroke { stroke: #1a1814; }
+  .illus .ink-fill { fill: #1a1814; }
+  .illus .on-ink { fill: #f7f2e8; }
+  @media (prefers-color-scheme: dark) {
+    .illus .stroke { stroke: #efe7d8; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
 </style>
 </head>
 <body>
 
-<div class="top-wrap">
-  <div class="inner">
-    <div class="top">
-      <div class="brand">Cihan Okuyor</div>
-      <div class="top-right">
-        <div class="yearnav">
-          <button class="icon-btn" data-act="prevYear" aria-label="Önceki yıl">‹</button>
-          <span id="yearLabel"></span>
-          <button class="icon-btn" data-act="nextYear" aria-label="Sonraki yıl">›</button>
-        </div>
-        <button class="icon-btn" data-act="menu" aria-label="Menü">⋯</button>
-      </div>
+<section class="screen on" id="s-okuma"></section>
+<section class="screen" id="s-defter"></section>
+<section class="screen" id="s-blog"></section>
+
+<nav class="dock" aria-label="Bölümler">
+  <div class="tabs">
+    <button class="tab on" data-act="tab" data-tab="okuma" aria-label="Okuma"></button>
+    <button class="tab" data-act="tab" data-tab="defter" aria-label="Defter"></button>
+    <button class="tab" data-act="tab" data-tab="blog" aria-label="Blog"></button>
+  </div>
+  <button class="fab" data-act="fab" id="fab" aria-label="Ekle"></button>
+</nav>
+
+<!-- Blog yazısı -->
+<div class="ov" id="article" role="dialog" aria-modal="true"></div>
+
+<!-- Not yazma -->
+<div class="ov" id="editor" role="dialog" aria-modal="true">
+  <div class="ed-bar">
+    <button class="back" data-act="closeEditor"><i id="edBackIcon"></i>Defter</button>
+    <div class="ed-right">
+      <button class="ed-del" data-act="delNote" aria-label="Notu sil" id="edDel"></button>
+      <button class="ed-done" data-act="closeEditor">Bitti</button>
     </div>
-    <div class="yearsum" id="yearsum"></div>
-    <nav class="months" id="months"></nav>
+  </div>
+  <div class="ed-wrap">
+    <div class="ed-date" id="edDate"></div>
+    <textarea class="ed-title" id="edTitle" rows="1" placeholder="Başlık" enterkeyhint="next"></textarea>
+    <div class="ed-meta">
+      <select class="ed-select" id="edBook" aria-label="İlgili kitap"></select>
+      <button class="pub-toggle" id="edPub" data-act="togglePub"><span class="sw"></span>Blogda yayınla</button>
+    </div>
+    <textarea class="ed-body" id="edBody" placeholder="Aklından geçenleri yaz…"></textarea>
+    <div class="ed-count" id="edCount"></div>
   </div>
 </div>
-
-<main id="view"></main>
-
-<div class="addbar"><button data-act="add">+ Kitap ekle</button></div>
 
 <div class="backdrop" id="backdrop" data-act="close"></div>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
 <input type="file" id="importFile" accept="application/json,.json" hidden>
 
+<!-- Karşılama -->
+<div id="welcome" role="dialog" aria-modal="true">
+  <div class="w-in">
+    <div class="w-note">her ay üç kitap, her kitap bir dünya</div>
+    <div id="wIllus"></div>
+    <h2>Okuyan insan</h2>
+    <div class="w-hand">başka hayatlar yaşar.
+      <svg viewBox="0 0 230 14" aria-hidden="true"><path d="M3 9 C 50 3, 110 4, 160 7 S 215 10, 227 5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+    </div>
+    <p>Kitaplarını ay ay takip et, okurken aklından geçenleri deftere yaz, beğendiklerini blogunda yayınla.</p>
+    <button class="w-btn" data-act="welcomeGo">Başlayalım</button>
+  </div>
+</div>
+
 <script>
   const KEY = 'cihan-okuyor-v1';
+  const WKEY = 'cihan-okuyor-karsilama';
   const HEDEF = 3;
   const AYLAR = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
-  const KISA  = ['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'];
+  const HARF  = ['O','Ş','M','N','M','H','T','A','E','E','K','A'];
   const DURUM = { unread: 'Okunmadı', reading: 'Okunuyor', done: 'Okundu' };
+  const TINTS = ['var(--t1)', 'var(--t3)', 'var(--t4)', 'var(--t2)'];
 
   const now = new Date();
   const BU_YIL = now.getFullYear();
   const BU_AY = now.getMonth();
 
-  let yil = BU_YIL;
-  let ay = BU_AY;
-  let seciliKitapId = null;
+  const st = { tab: 'okuma', yil: BU_YIL, ay: BU_AY, filtre: 'hepsi', kitapFiltre: null, notId: null, sheetKitap: null };
+
+  // ---------- İkonlar ----------
+  const svg = (d, w = 22, sw = 1.8) => `<svg width="${w}" height="${w}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+  const IC = {
+    book:  svg('<path d="M3 5.5c2.6-1.2 5.6-1.1 9 .9 3.4-2 6.4-2.1 9-.9v13c-2.6-1.2-5.6-1.1-9 .9-3.4-2-6.4-2.1-9-.9z"/><path d="M12 6.4v13.5"/>'),
+    pen:   svg('<path d="M4 20l1-4.2L16.3 4.5a2 2 0 0 1 2.9 0l.3.3a2 2 0 0 1 0 2.9L8.2 19z"/><path d="M14.5 6.3l3.2 3.2"/><path d="M13 20h7"/>'),
+    paper: svg('<path d="M5 4h11v15.5a.5.5 0 0 1-.5.5H6.5A1.5 1.5 0 0 1 5 18.5z"/><path d="M16 8h3v10.5a1.5 1.5 0 0 1-3 0"/><path d="M8 8h5M8 11.5h5M8 15h3"/>'),
+    plus:  svg('<path d="M12 5v14M5 12h14"/>', 26, 2.2),
+    left:  svg('<path d="M19 12H5M11 6l-6 6 6 6"/>', 20),
+    chevL: svg('<path d="M14.5 6l-6 6 6 6"/>', 20, 2),
+    chevR: svg('<path d="M9.5 6l6 6-6 6"/>', 20, 2),
+    dots:  svg('<circle cx="5" cy="12" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/><circle cx="19" cy="12" r="1.3" fill="currentColor"/>', 22),
+    trash: svg('<path d="M4 7h16M9.5 7V4.5h5V7M6.5 7l1 12.5h9l1-12.5"/>', 21),
+    x:     svg('<path d="M6 6l12 12M18 6L6 18"/>', 18, 2),
+  };
+
+  const ILLUS = `
+  <svg class="illus" viewBox="0 0 380 300" aria-hidden="true">
+    <g class="stroke" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M44 118l13 9M30 150l17 1M50 92l5 15" stroke="#ee5a24" style="stroke:#ee5a24"/>
+      <path d="M318 98l-9 13M336 128l-16 5" stroke="#ee5a24" style="stroke:#ee5a24"/>
+      <path d="M201 92C196 62 177 47 155 45c6 23 24 37 46 47z" fill="#233a30"/>
+      <path d="M201 92c5-32 25-50 50-55-6 26-26 44-50 55z" fill="#233a30"/>
+      <path d="M201 92c-3-30 1-58 13-78 9 27 2 56-13 78z" fill="#3f5c49"/>
+      <path d="M167 92h68l-8 36h-52z" fill="#f7f2e8"/>
+      <path d="M170 101h62"/>
+      <rect x="84" y="128" width="214" height="40" rx="5" fill="#ee5a24"/>
+      <rect x="50" y="168" width="238" height="40" rx="5" fill="#f0c5b6"/>
+      <rect x="54" y="171" width="14" height="34" fill="#f7f2e8" stroke="none"/>
+      <path d="M57 178h9M57 186h9M57 194h9" stroke-width="1.4"/>
+      <rect x="76" y="208" width="220" height="40" rx="5" class="ink-fill"/>
+      <rect x="58" y="248" width="246" height="42" rx="5" fill="#a9ba94"/>
+      <rect x="285" y="251" width="16" height="36" fill="#f7f2e8" stroke="none"/>
+      <path d="M288 259h11M288 267h11M288 275h11M288 283h11" stroke-width="1.4"/>
+      <path d="M18 290h344"/>
+      <rect x="314" y="238" width="42" height="52" rx="6" fill="#ee5a24"/>
+      <path d="M356 250c15 0 15 26 0 26"/>
+      <path d="M326 228c-6-7 6-11 0-19M343 228c-6-7 6-11 0-19" stroke-width="2.2"/>
+    </g>
+    <g font-family="Caveat, cursive" font-weight="700">
+      <text x="106" y="155" font-size="23" class="on-ink" style="fill:#fbf7ef">Sessiz Sayfalar</text>
+      <text x="84" y="195" font-size="23" fill="#1a1814" style="fill:#1a1814">Uzun Bir Akşam</text>
+      <text x="96" y="235" font-size="23" class="on-ink">Gece Kitaplığı</text>
+      <text x="80" y="276" font-size="23" fill="#1a1814" style="fill:#1a1814">Kenar Notları</text>
+      <text x="320" y="262" font-size="13" style="fill:#fbf7ef">hâlâ</text>
+      <text x="317" y="276" font-size="13" style="fill:#fbf7ef">okuyor</text>
+    </g>
+    <path d="M262 220a8 8 0 1 0 9 12 6.5 6.5 0 1 1-9-12z" fill="#f2c35a"/>
+  </svg>`;
 
   // ---------- Veri ----------
   function load() {
     try {
       const d = JSON.parse(localStorage.getItem(KEY));
-      if (d && d.years) return d;
+      if (d && d.years) { if (!Array.isArray(d.notes)) d.notes = []; return d; }
     } catch (e) {}
-    return { years: {} };
+    return { years: {}, notes: [] };
   }
   function save() {
     try { localStorage.setItem(KEY, JSON.stringify(data)); }
@@ -269,87 +557,350 @@
     if (!data.years[y][m]) { if (!olustur) return []; data.years[y][m] = []; }
     return data.years[y][m];
   }
-  const bul = id => kitaplar(yil, ay).find(b => b.id === id);
-  const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
-  const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const okunan = list => list.filter(b => b.status === 'done').length;
-  const noktalar = n => Array.from({ length: HEDEF }, (_, i) => `<i class="${i < n ? 'on' : ''}"></i>`).join('');
-  const titret = () => { if (navigator.vibrate) navigator.vibrate(8); };
+  function tumKitaplar() {
+    const out = [];
+    Object.keys(data.years).sort((a, b) => b - a).forEach(y => {
+      for (let m = 11; m >= 0; m--) kitaplar(y, m).forEach(b => out.push({ b, y: Number(y), m }));
+    });
+    return out;
+  }
+  const kitapBul = id => id ? (tumKitaplar().find(k => k.b.id === id) || null) : null;
+  const ayKitabi = id => kitaplar(st.yil, st.ay).find(b => b.id === id);
+  const notBul = id => data.notes.find(n => n.id === id);
+  const kitapNotlari = id => data.notes.filter(n => n.bookId === id);
 
-  // ---------- Çizim ----------
+  const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const okunan = list => list.filter(b => b.status === 'done').length;
+  const tarih = ts => { const d = new Date(ts); return `${d.getDate()} ${AYLAR[d.getMonth()]} ${d.getFullYear()}`; };
+  const titret = () => { if (navigator.vibrate) navigator.vibrate(8); };
   const $ = id => document.getElementById(id);
 
-  function render(animasyon) {
-    // Yıl
-    $('yearLabel').textContent = yil;
+  function monogram(t) {
+    const k = t.trim().split(/\s+/).filter(w => /\p{L}/u.test(w));
+    return k.slice(0, 2).map(w => w.match(/\p{L}/u)[0].toLocaleUpperCase('tr')).join('');
+  }
+  function notBasligi(n) {
+    if (n.title && n.title.trim()) return n.title.trim();
+    const ilk = (n.body || '').trim().split('\n')[0];
+    return ilk ? (ilk.length > 48 ? ilk.slice(0, 48) + '…' : ilk) : '';
+  }
+  function ozet(n, uz = 170) {
+    let t = (n.body || '').replace(/\s+/g, ' ').trim();
+    if (!(n.title && n.title.trim())) t = t.slice(notBasligi(n).replace(/…$/, '').length).trim();
+    return t.length > uz ? t.slice(0, uz) + '…' : t;
+  }
+  function notKitabi(n) {
+    if (!n.bookId) return null;
+    const k = kitapBul(n.bookId);
+    if (k) return { title: k.b.title, author: k.b.author };
+    return n.bookTitle ? { title: n.bookTitle, author: n.bookAuthor } : null;
+  }
+
+  // ================= Çizim =================
+  function render() {
+    renderOkuma(); renderDefter(); renderBlog(); renderDock();
+  }
+
+  function renderDock() {
+    const etiket = { okuma: ['book', 'Okuma'], defter: ['pen', 'Defter'], blog: ['paper', 'Blog'] };
+    document.querySelectorAll('.tab').forEach(t => {
+      const [ic, ad] = etiket[t.dataset.tab];
+      t.innerHTML = `${IC[ic]}<span>${ad}</span>`;
+      t.classList.toggle('on', t.dataset.tab === st.tab);
+      t.setAttribute('aria-current', t.dataset.tab === st.tab ? 'page' : 'false');
+    });
+    document.querySelectorAll('.screen').forEach(s => s.classList.toggle('on', s.id === 's-' + st.tab));
+    $('fab').innerHTML = IC.plus;
+    $('fab').setAttribute('aria-label', { okuma: 'Kitap ekle', defter: 'Yeni not', blog: 'Yeni yazı' }[st.tab]);
+  }
+
+  // ---------- Okuma ----------
+  function renderOkuma() {
+    const yuk = [46, 54, 41, 50, 57, 44];
     let toplam = 0;
-    for (let m = 0; m < 12; m++) toplam += okunan(kitaplar(yil, m));
-    const hedef = HEDEF * 12;
-    $('yearsum').innerHTML =
-      `<span><b>${toplam}</b>/${hedef} okundu</span>
-       <div class="bar"><span style="width:${Math.min(100, toplam / hedef * 100)}%"></span></div>`;
-
-    // Ay şeridi
-    $('months').innerHTML = KISA.map((k, m) => {
-      const n = okunan(kitaplar(yil, m));
-      const cls = ['mchip', m === ay ? 'sel' : '', (yil === BU_YIL && m === BU_AY) ? 'now' : ''].join(' ');
-      return `<button class="${cls}" data-act="month" data-m="${m}">${k}<span class="dots">${noktalar(n)}</span></button>`;
+    const raf = AYLAR.map((ad, m) => {
+      const list = kitaplar(st.yil, m);
+      toplam += okunan(list);
+      const slot = Math.max(HEDEF, Math.min(list.length, 5));
+      let sp = '';
+      for (let i = 0; i < slot; i++) {
+        const b = list[i];
+        sp += b ? `<i class="${b.status}" style="height:${yuk[(m * 3 + i) % 6]}px"></i>` : `<i class="bos" style="height:40px"></i>`;
+      }
+      const cls = ['grp', m === st.ay ? 'sel' : '', (st.yil === BU_YIL && m === BU_AY) ? 'now' : ''].join(' ');
+      return `<button class="${cls}" data-act="month" data-m="${m}" aria-label="${ad}"><span class="sp">${sp}</span><small>${HARF[m]}</small></button>`;
     }).join('');
-    ortala();
 
-    // Ay ekranı
-    const list = kitaplar(yil, ay);
+    const list = kitaplar(st.yil, st.ay);
     const n = okunan(list);
+    const buAyMi = st.yil === BU_YIL && st.ay === BU_AY;
+    const gd = Array.from({ length: HEDEF }, (_, i) => `<i class="${i < n ? 'on' : ''}"></i>`).join('');
+
     const icerik = list.length
       ? `<ul class="books">${list.map(kitapHTML).join('')}</ul>`
-      : `<div class="empty"><div class="big">📚</div>Bu ay için henüz kitap yok.<br>Aşağıdaki butonla ekleyebilirsin.</div>`;
-    $('view').innerHTML = `
-      <div class="${animasyon ? 'fade' : ''}">
-        <div class="m-title">
-          <h1>${AYLAR[ay]}<small>${yil}</small></h1>
-          <div class="goal${n >= HEDEF ? ' ok' : ''}"><span class="dots">${noktalar(n)}</span>${n}/${HEDEF}</div>
+      : `<div class="empty">${ILLUS}<p>${AYLAR[st.ay]} rafı boş. Bu ay okuyacağın üç kitabı turuncu butonla ekle.</p></div>`;
+
+    $('s-okuma').innerHTML = `
+      <header class="hd">
+        <div><div class="brand">Cihan Okuyor</div><div class="hand">her ay üç kitap</div></div>
+        <button class="round" data-act="menu" aria-label="Yedekleme">${IC.dots}</button>
+      </header>
+      <section class="shelfcard" aria-label="${st.yil} kitap rafı">
+        <div class="sc-top">
+          <div class="sc-year">${st.yil}</div>
+          <div class="sc-nav">
+            <button data-act="prevYear" aria-label="Önceki yıl">${IC.chevL}</button>
+            <button data-act="nextYear" aria-label="Sonraki yıl">${IC.chevR}</button>
+          </div>
         </div>
-        ${icerik}
-      </div>`;
+        <div class="sc-count">${toplam} / ${HEDEF * 12} kitap okundu</div>
+        <div class="shelf">${raf}</div>
+      </section>
+      <div class="mhead">
+        <div><h1>${AYLAR[st.ay]}</h1>${buAyMi ? '<div class="hand">bu ay</div>' : ''}</div>
+        <div class="goal${n >= HEDEF ? ' ok' : ''}"><span class="gdots">${gd}</span>${n}/${HEDEF}</div>
+      </div>
+      ${icerik}`;
   }
 
   function kitapHTML(b) {
+    const nc = kitapNotlari(b.id).length;
     return `
       <li class="book s-${b.status}" data-id="${b.id}">
-        <div class="b-top">
-          <div class="b-info">
-            <div class="b-label">${DURUM[b.status]}</div>
-            <div class="b-title">${esc(b.title)}</div>
-            ${b.author ? `<div class="b-author">${esc(b.author)}</div>` : ''}
+        <div class="cover" aria-hidden="true"><span>${esc(monogram(b.title))}</span><div><em></em><em></em></div></div>
+        <div class="b-body">
+          <div class="b-status">${DURUM[b.status]}</div>
+          <div class="b-title">${esc(b.title)}</div>
+          ${b.author ? `<div class="b-author">${esc(b.author)}</div>` : ''}
+          ${nc ? `<button class="b-notes" data-act="bookNotes">${nc} not</button>` : ''}
+          <div class="b-actions">
+            <button data-act="reading" class="${b.status === 'reading' ? 'on' : ''}">Okuyorum</button>
+            <button data-act="done" class="${b.status === 'done' ? 'on' : ''}">Okudum</button>
           </div>
-          <button class="more" data-act="more" aria-label="Seçenekler">⋯</button>
         </div>
-        <div class="b-actions">
-          <button data-act="reading" class="${b.status === 'reading' ? 'on' : ''}">Okuyorum</button>
-          <button data-act="done" class="${b.status === 'done' ? 'on' : ''}">Okudum</button>
-        </div>
+        <button class="more" data-act="more" aria-label="Seçenekler">${IC.dots}</button>
       </li>`;
   }
 
-  let ilkOrtalama = true;
-  function ortala() {
-    const serit = $('months');
-    const chip = serit.children[ay];
-    if (!chip) return;
-    const hedefX = chip.offsetLeft - serit.clientWidth / 2 + chip.offsetWidth / 2;
-    serit.scrollTo({ left: hedefX, behavior: ilkOrtalama ? 'auto' : 'smooth' });
-    ilkOrtalama = false;
+  // ---------- Defter ----------
+  function renderDefter() {
+    let notlar = [...data.notes].sort((a, b) => b.updatedAt - a.updatedAt);
+    if (st.filtre === 'taslak') notlar = notlar.filter(n => !n.published);
+    if (st.filtre === 'blog') notlar = notlar.filter(n => n.published);
+    let kf = '';
+    if (st.kitapFiltre) {
+      notlar = notlar.filter(n => n.bookId === st.kitapFiltre);
+      const k = kitapBul(st.kitapFiltre);
+      kf = `<div class="kfiltre"><span><b>${esc(k ? k.b.title : 'Kitap')}</b> hakkındaki notlar</span><button data-act="clearBook" aria-label="Filtreyi kaldır">${IC.x}</button></div>`;
+    }
+    const seg = [['hepsi', 'Hepsi'], ['taslak', 'Taslaklar'], ['blog', 'Blogdakiler']]
+      .map(([k, ad]) => `<button class="${st.filtre === k ? 'on' : ''}" data-act="filter" data-f="${k}">${ad}</button>`).join('');
+
+    const bos = data.notes.length === 0
+      ? 'Defterin boş. Bir kitap hakkında düşündüklerini, altını çizdiğin cümleleri ya da aklına gelen bir fikri yazarak başla.'
+      : 'Bu seçimde not yok.';
+
+    $('s-defter').innerHTML = `
+      <header class="hd">
+        <div><div class="brand">Defter</div><div class="hand">aklımdan geçenler</div></div>
+      </header>
+      <div class="seg" role="tablist">${seg}</div>
+      ${kf}
+      ${notlar.length
+        ? `<div class="notes">${notlar.map(notHTML).join('')}</div>`
+        : `<div class="empty">${data.notes.length ? '' : ILLUS}<p>${bos}</p></div>`}`;
   }
 
-  function ayDegistir(fark) {
-    ay += fark;
-    if (ay < 0) { ay = 11; yil--; }
-    if (ay > 11) { ay = 0; yil++; }
-    render(true);
-    window.scrollTo(0, 0);
+  function notHTML(n) {
+    const baslik = notBasligi(n);
+    const k = notKitabi(n);
+    const ex = ozet(n, 160);
+    return `
+      <button class="note" data-act="openNote" data-id="${n.id}">
+        <div class="n-date">${tarih(n.updatedAt)}</div>
+        <div class="n-title${baslik ? '' : ' untitled'}">${baslik ? esc(baslik) : 'Boş not'}</div>
+        ${ex ? `<div class="n-ex">${esc(ex)}</div>` : ''}
+        ${(k || n.published) ? `<div class="n-foot">
+          ${k ? `<span class="chip">${esc(k.title)}</span>` : ''}
+          ${n.published ? `<span class="chip pub">Blogda</span>` : ''}
+        </div>` : ''}
+      </button>`;
   }
 
-  // ---------- Alt sayfa ----------
+  // ---------- Blog ----------
+  function blogYazilari() {
+    return data.notes.filter(n => n.published && notBasligi(n))
+      .sort((a, b) => (b.publishedAt || b.createdAt) - (a.publishedAt || a.createdAt));
+  }
+
+  function renderBlog() {
+    const yazilar = blogYazilari();
+    const son = yazilar[0];
+    $('s-blog').innerHTML = `
+      <section class="mast">
+        <div class="mast-top"><b>Cihan Okuyor</b><span class="round" aria-hidden="true">${IC.paper}</span></div>
+        <div class="mast-line">${son ? 'Son yazı: ' + esc(notBasligi(son)) : 'Okuma notları ve denemeler'}</div>
+        <div class="mast-body">
+          <h2>Okuduklarım, düşündüklerim.</h2>
+          <div class="hand">yazdıkça anlıyorum</div>
+        </div>
+      </section>
+      ${yazilar.length
+        ? `<div class="count">${yazilar.length} yazı</div>` + yazilar.map((n, i) => postHTML(n, i)).join('')
+        : `<div class="empty"><p>Henüz yayınlanmış yazı yok. Defterdeki bir notu açıp “Blogda yayınla”ya bastığında burada görünür.</p></div>`}`;
+  }
+
+  function postHTML(n, i) {
+    const k = notKitabi(n);
+    return `
+      <button class="post${i === 0 ? ' feat' : ''}" style="background:${TINTS[i % TINTS.length]}" data-act="openPost" data-id="${n.id}" data-i="${i}">
+        <div class="p-date">${tarih(n.publishedAt || n.createdAt)}</div>
+        <div class="p-title">${esc(notBasligi(n))}</div>
+        <div class="p-ex">${esc(ozet(n, i === 0 ? 220 : 150))}</div>
+        ${k ? `<div class="p-book">Kitap: <i>${esc(k.title)}</i>${k.author ? ', ' + esc(k.author) : ''}</div>` : ''}
+      </button>`;
+  }
+
+  // ================= Tam ekran katmanlar =================
+  function katmanAc(id, degistir) {
+    $(id).classList.add('open');
+    $(id).scrollTop = 0;
+    const s = { ov: id };
+    if (degistir) history.replaceState(s, ''); else history.pushState(s, '');
+  }
+  function katmanKapat() {
+    if (history.state && history.state.ov) history.back();
+    else gorselKapat();
+  }
+  function gorselKapat() {
+    if ($('editor').classList.contains('open')) { editorTemizle(); $('editor').classList.remove('open'); render(); }
+    else if ($('article').classList.contains('open')) { $('article').classList.remove('open'); }
+  }
+  window.addEventListener('popstate', () => { sheetKapat(); gorselKapat(); });
+
+  // ---------- Yazı okuma ----------
+  function yaziAc(id, i) {
+    const n = notBul(id);
+    if (!n) return;
+    const k = notKitabi(n);
+    const paragraflar = (n.body || '').split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
+    let govde = paragraflar;
+    if (!(n.title && n.title.trim()) && govde.length) {
+      govde = [...govde];
+      govde[0] = govde[0].slice(notBasligi(n).replace(/…$/, '').length).trim();
+      if (!govde[0]) govde.shift();
+    }
+    $('article').innerHTML = `
+      <article class="art" style="background:${TINTS[(i || 0) % TINTS.length]}">
+        <div class="art-top"><b>Cihan Okuyor</b><span class="round" aria-hidden="true">${IC.paper}</span></div>
+        <div class="art-line">${k ? esc(k.title) + (k.author ? ', ' + esc(k.author) : '') : 'Okuma notları ve denemeler'}</div>
+        <div class="art-in">
+          <button class="back" data-act="closeArticle"><i>${IC.left}</i>Geri</button>
+          <h1>${esc(notBasligi(n))}</h1>
+          <div class="art-date">${tarih(n.publishedAt || n.createdAt)}</div>
+          <div class="art-text">${govde.map(p => `<p>${esc(p).replace(/\n/g, '<br>')}</p>`).join('')}</div>
+        </div>
+        <div class="art-foot"><button data-act="editPost" data-id="${n.id}">Düzenle</button></div>
+      </article>`;
+    katmanAc('article');
+  }
+
+  // ---------- Not yazma ----------
+  let kayitZamani = null;
+  function notAc(id, ops = {}, degistir) {
+    let n = id && notBul(id);
+    if (!n) {
+      const k = ops.bookId ? kitapBul(ops.bookId) : null;
+      n = {
+        id: uid(), title: '', body: '',
+        bookId: k ? k.b.id : null, bookTitle: k ? k.b.title : '', bookAuthor: k ? (k.b.author || '') : '',
+        published: !!ops.published, publishedAt: ops.published ? Date.now() : null,
+        createdAt: Date.now(), updatedAt: Date.now()
+      };
+      data.notes.push(n);
+    }
+    st.notId = n.id;
+    $('edBackIcon').innerHTML = IC.left;
+    $('edDel').innerHTML = IC.trash;
+    $('edDate').textContent = tarih(n.createdAt);
+    $('edTitle').value = n.title;
+    $('edBody').value = n.body;
+    kitapSecenekleri(n);
+    yayinGoster(n);
+    sayac();
+    katmanAc('editor', degistir);
+    setTimeout(buyut, 0);
+    if (!n.title && !n.body) setTimeout(() => $('edTitle').focus(), 320);
+  }
+
+  function kitapSecenekleri(n) {
+    const gruplar = {};
+    tumKitaplar().forEach(({ b, y, m }) => {
+      const g = `${AYLAR[m]} ${y}`;
+      (gruplar[g] = gruplar[g] || []).push(b);
+    });
+    let html = `<option value="">Kitap seçilmedi</option>`;
+    let var_mi = !n.bookId;
+    for (const g in gruplar) {
+      html += `<optgroup label="${esc(g)}">` + gruplar[g].map(b => {
+        if (b.id === n.bookId) var_mi = true;
+        return `<option value="${b.id}"${b.id === n.bookId ? ' selected' : ''}>${esc(b.title)}</option>`;
+      }).join('') + `</optgroup>`;
+    }
+    if (!var_mi) html += `<option value="${n.bookId}" selected>${esc(n.bookTitle || 'Silinmiş kitap')}</option>`;
+    $('edBook').innerHTML = html;
+  }
+
+  function yayinGoster(n) {
+    $('edPub').classList.toggle('on', !!n.published);
+    $('edPub').setAttribute('aria-pressed', n.published ? 'true' : 'false');
+    $('edPub').lastChild.textContent = n.published ? 'Blogda yayında' : 'Blogda yayınla';
+  }
+  function sayac() {
+    const k = ($('edBody').value.trim().match(/\S+/g) || []).length;
+    $('edCount').textContent = k ? `${k} kelime` : '';
+  }
+  function buyut() {
+    const b = $('edTitle');
+    b.style.height = 'auto';
+    b.style.height = b.scrollHeight + 'px';
+    const t = $('edBody');
+    t.style.height = 'auto';
+    t.style.height = Math.max(t.scrollHeight, window.innerHeight * .55) + 'px';
+  }
+  function notGuncelle() {
+    const n = notBul(st.notId);
+    if (!n) return;
+    n.title = $('edTitle').value;
+    n.body = $('edBody').value;
+    n.updatedAt = Date.now();
+    clearTimeout(kayitZamani);
+    kayitZamani = setTimeout(save, 300);
+  }
+  function editorTemizle() {
+    clearTimeout(kayitZamani);
+    const n = notBul(st.notId);
+    if (n && !n.title.trim() && !n.body.trim()) data.notes.splice(data.notes.indexOf(n), 1);
+    st.notId = null;
+    document.activeElement && document.activeElement.blur();
+    save();
+  }
+
+  $('edTitle').addEventListener('input', () => { notGuncelle(); buyut(); });
+  $('edBody').addEventListener('input', () => { notGuncelle(); sayac(); buyut(); });
+  $('edBook').addEventListener('change', e => {
+    const n = notBul(st.notId);
+    if (!n) return;
+    const k = kitapBul(e.target.value);
+    n.bookId = k ? k.b.id : null;
+    n.bookTitle = k ? k.b.title : '';
+    n.bookAuthor = k ? (k.b.author || '') : '';
+    n.updatedAt = Date.now();
+    save();
+  });
+
+  // ================= Alt pencere =================
   function sheetAc(html) {
     $('sheet').innerHTML = `<div class="grab"></div>${html}`;
     $('sheet').classList.add('open');
@@ -358,30 +909,33 @@
   function sheetKapat() {
     $('sheet').classList.remove('open');
     $('backdrop').classList.remove('open');
-    document.activeElement && document.activeElement.blur();
-    seciliKitapId = null;
+    if (document.activeElement && $('sheet').contains(document.activeElement)) document.activeElement.blur();
+    st.sheetKitap = null;
   }
   const sheetAcik = () => $('sheet').classList.contains('open');
 
-  function formAc(kitap) {
-    seciliKitapId = kitap ? kitap.id : null;
+  function kitapFormu(kitap) {
+    st.sheetKitap = kitap ? kitap.id : null;
     sheetAc(`
       <h3>${kitap ? 'Kitabı düzenle' : 'Kitap ekle'}</h3>
-      <p class="hint">${AYLAR[ay]} ${yil}</p>
+      <p class="hint">${AYLAR[st.ay]} ${st.yil} rafına</p>
       <form id="bookForm" autocomplete="off">
-        <input name="baslik" placeholder="Kitap adı" value="${kitap ? esc(kitap.title) : ''}" enterkeyhint="next">
-        <input name="yazar" placeholder="Yazar (isteğe bağlı)" value="${kitap ? esc(kitap.author || '') : ''}" enterkeyhint="done">
-        <button type="submit" class="sbtn primary">${kitap ? 'Kaydet' : 'Ekle'}</button>
+        <input name="baslik" placeholder="Kitabın adı" value="${kitap ? esc(kitap.title) : ''}" enterkeyhint="next">
+        <input name="yazar" placeholder="Yazarı (isteğe bağlı)" value="${kitap ? esc(kitap.author || '') : ''}" enterkeyhint="done">
+        <button type="submit" class="sbtn primary">${kitap ? 'Kaydet' : 'Rafa ekle'}</button>
         <button type="button" class="sbtn plain" data-act="close">Vazgeç</button>
       </form>`);
-    $("bookForm").baslik.focus();
+    $('bookForm').baslik.focus();
   }
 
-  function secenekAc(kitap) {
-    seciliKitapId = kitap.id;
+  function kitapSecenek(kitap) {
+    st.sheetKitap = kitap.id;
+    const nc = kitapNotlari(kitap.id).length;
     sheetAc(`
       <h3>${esc(kitap.title)}</h3>
-      <p class="hint">${kitap.author ? esc(kitap.author) + ' · ' : ''}${DURUM[kitap.status]}</p>
+      <p class="hint">${kitap.author ? esc(kitap.author) + ', ' : ''}${DURUM[kitap.status].toLocaleLowerCase('tr')}</p>
+      <button class="sbtn primary" data-act="writeAbout">Bu kitap hakkında yaz</button>
+      ${nc ? `<button class="sbtn" data-act="bookNotesSheet">Notlarını gör (${nc})</button>` : ''}
       <button class="sbtn" data-act="edit">Düzenle</button>
       ${kitap.status !== 'unread' ? `<button class="sbtn" data-act="reset">Okunmadı olarak işaretle</button>` : ''}
       <button class="sbtn danger" data-act="delete">Sil</button>
@@ -391,54 +945,114 @@
   function menuAc() {
     sheetAc(`
       <h3>Yedekleme</h3>
-      <p class="hint">Kitapların bu telefonda saklanır. Telefon değiştirirken ya da tedbir olarak yedek alabilirsin.</p>
+      <p class="hint">Kitapların ve notların bu telefonda saklanır. Telefon değiştirirken ya da tedbir olarak yedek al.</p>
       <button class="sbtn" data-act="export">Yedek al</button>
       <button class="sbtn" data-act="import">Yedekten yükle</button>
       <button class="sbtn plain" data-act="close">Kapat</button>`);
   }
 
-  // ---------- Dokunma olayları ----------
+  function sekmeyeGec(t) {
+    st.tab = t;
+    renderDock();
+    window.scrollTo(0, 0);
+  }
+
+  // ================= Dokunma olayları =================
   document.addEventListener('click', e => {
     const el = e.target.closest('[data-act]');
     if (!el) return;
     const act = el.dataset.act;
     const kartEl = el.closest('.book');
-    const kitap = kartEl ? bul(kartEl.dataset.id) : (seciliKitapId ? bul(seciliKitapId) : null);
+    const kitap = kartEl ? ayKitabi(kartEl.dataset.id) : (st.sheetKitap ? ayKitabi(st.sheetKitap) : null);
 
     switch (act) {
-      case 'prevYear': yil--; if (yil === BU_YIL) ay = BU_AY; render(true); break;
-      case 'nextYear': yil++; if (yil === BU_YIL) ay = BU_AY; render(true); break;
-      case 'month':    ay = Number(el.dataset.m); render(true); window.scrollTo(0, 0); break;
-      case 'add':      formAc(null); break;
-      case 'menu':     menuAc(); break;
-      case 'close':    sheetKapat(); break;
-      case 'more':     if (kitap) secenekAc(kitap); break;
+      case 'tab': sekmeyeGec(el.dataset.tab); break;
+      case 'fab':
+        if (st.tab === 'okuma') kitapFormu(null);
+        else if (st.tab === 'defter') notAc(null, { bookId: st.kitapFiltre });
+        else notAc(null, { published: true });
+        break;
+
+      case 'month': st.ay = Number(el.dataset.m); renderOkuma(); break;
+      case 'prevYear': st.yil--; st.ay = st.yil === BU_YIL ? BU_AY : st.ay; renderOkuma(); break;
+      case 'nextYear': st.yil++; st.ay = st.yil === BU_YIL ? BU_AY : st.ay; renderOkuma(); break;
 
       case 'reading':
       case 'done':
         if (!kitap) return;
         kitap.status = kitap.status === act ? 'unread' : act;
-        titret(); save(); render();
+        titret(); save(); renderOkuma();
+        break;
+      case 'more': if (kitap) kitapSecenek(kitap); break;
+      case 'bookNotes':
+        if (!kitap) return;
+        st.kitapFiltre = kitap.id; st.filtre = 'hepsi'; renderDefter(); sekmeyeGec('defter');
         break;
 
-      case 'edit':
-        if (kitap) formAc(kitap);
+      case 'writeAbout': {
+        if (!kitap) return;
+        const id = kitap.id; sheetKapat(); notAc(null, { bookId: id });
         break;
+      }
+      case 'bookNotesSheet': {
+        if (!kitap) return;
+        st.kitapFiltre = kitap.id; st.filtre = 'hepsi'; sheetKapat(); renderDefter(); sekmeyeGec('defter');
+        break;
+      }
+      case 'edit': if (kitap) kitapFormu(kitap); break;
       case 'reset':
         if (!kitap) return;
-        kitap.status = 'unread';
-        save(); sheetKapat(); render();
+        kitap.status = 'unread'; save(); sheetKapat(); renderOkuma();
         break;
       case 'delete': {
         if (!kitap) return;
-        if (!confirm(`"${kitap.title}" silinsin mi?`)) return;
-        const list = kitaplar(yil, ay);
+        const nc = kitapNotlari(kitap.id).length;
+        if (!confirm(`"${kitap.title}" raftan silinsin mi?${nc ? ' Notların defterde kalır.' : ''}`)) return;
+        const list = kitaplar(st.yil, st.ay);
         list.splice(list.indexOf(kitap), 1);
         save(); sheetKapat(); render();
         break;
       }
+
+      case 'filter': st.filtre = el.dataset.f; renderDefter(); break;
+      case 'clearBook': st.kitapFiltre = null; renderDefter(); break;
+      case 'openNote': notAc(el.dataset.id); break;
+
+      case 'openPost': yaziAc(el.dataset.id, Number(el.dataset.i)); break;
+      case 'closeArticle': katmanKapat(); break;
+      case 'editPost':
+        $('article').classList.remove('open');
+        notAc(el.dataset.id, {}, true);
+        break;
+
+      case 'closeEditor': katmanKapat(); break;
+      case 'togglePub': {
+        const n = notBul(st.notId);
+        if (!n) return;
+        n.published = !n.published;
+        if (n.published) n.publishedAt = Date.now();
+        n.updatedAt = Date.now();
+        yayinGoster(n); titret(); save();
+        break;
+      }
+      case 'delNote': {
+        const n = notBul(st.notId);
+        if (!n) return;
+        if ((n.title.trim() || n.body.trim()) && !confirm('Bu not silinsin mi?')) return;
+        data.notes.splice(data.notes.indexOf(n), 1);
+        st.notId = null; save(); katmanKapat();
+        break;
+      }
+
+      case 'menu': menuAc(); break;
+      case 'close': sheetKapat(); break;
       case 'export': yedekAl(); break;
       case 'import': $('importFile').click(); break;
+
+      case 'welcomeGo':
+        try { localStorage.setItem(WKEY, '1'); } catch (err) {}
+        $('welcome').classList.remove('open');
+        break;
     }
   });
 
@@ -449,51 +1063,47 @@
     const title = f.baslik.value.trim();
     const author = f.yazar.value.trim();
     if (!title) { f.baslik.focus(); return; }
-    const mevcut = seciliKitapId && bul(seciliKitapId);
-    if (mevcut) {
-      mevcut.title = title;
-      mevcut.author = author;
-    } else {
-      kitaplar(yil, ay, true).push({ id: uid(), title, author, status: 'unread' });
-    }
+    const mevcut = st.sheetKitap && ayKitabi(st.sheetKitap);
+    if (mevcut) { mevcut.title = title; mevcut.author = author; }
+    else kitaplar(st.yil, st.ay, true).push({ id: uid(), title, author, status: 'unread' });
     save(); sheetKapat(); render();
   });
 
-  // Yazar alanında "ileri" tuşu: başlıktan yazara geç
   document.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && e.target.name === "baslik") {
-      e.preventDefault();
-      e.target.form.yazar.focus();
-    }
-    if (e.key === 'Escape' && sheetAcik()) sheetKapat();
+    if (e.key === 'Enter' && e.target.name === 'baslik') { e.preventDefault(); e.target.form.yazar.focus(); }
+    if (e.key === 'Enter' && e.target.id === 'edTitle') { e.preventDefault(); $('edBody').focus(); }
+    if (e.key === 'Escape') { if (sheetAcik()) sheetKapat(); else katmanKapat(); }
   });
 
-  // Sağa / sola kaydırarak ay değiştir
+  // Okuma ekranında sağa/sola kaydırarak ay değiştir
   let tx = null, ty = null;
-  $('view').addEventListener('touchstart', e => {
+  $('s-okuma').addEventListener('touchstart', e => {
     if (e.touches.length !== 1) return;
     tx = e.touches[0].clientX; ty = e.touches[0].clientY;
   }, { passive: true });
-  $('view').addEventListener('touchend', e => {
+  $('s-okuma').addEventListener('touchend', e => {
     if (tx === null || sheetAcik()) return;
-    const dx = e.changedTouches[0].clientX - tx;
-    const dy = e.changedTouches[0].clientY - ty;
+    const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
     tx = ty = null;
-    if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.6) ayDegistir(dx < 0 ? 1 : -1);
+    if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.6) {
+      st.ay += dx < 0 ? 1 : -1;
+      if (st.ay < 0) { st.ay = 11; st.yil--; }
+      if (st.ay > 11) { st.ay = 0; st.yil++; }
+      renderOkuma();
+    }
   }, { passive: true });
 
-  // Klavye açılınca alt sayfayı klavyenin üstüne taşı
+  // Klavye açılınca alt pencereyi klavyenin üstüne taşı
   if (window.visualViewport) {
     const ayarla = () => {
       const vv = window.visualViewport;
-      const alt = Math.max(0, window.innerHeight - vv.height - vv.offsetTop);
-      $('sheet').style.bottom = alt + 'px';
+      $('sheet').style.bottom = Math.max(0, window.innerHeight - vv.height - vv.offsetTop) + 'px';
     };
     visualViewport.addEventListener('resize', ayarla);
     visualViewport.addEventListener('scroll', ayarla);
   }
 
-  // ---------- Yedekleme ----------
+  // ================= Yedekleme =================
   async function yedekAl() {
     const ad = `cihan-okuyor-yedek-${new Date().toISOString().slice(0, 10)}.json`;
     const metin = JSON.stringify(data, null, 2);
@@ -503,15 +1113,11 @@
         await navigator.share({ files: [dosya], title: 'Cihan Okuyor yedeği' });
         return;
       }
-    } catch (err) {
-      if (err && err.name === 'AbortError') return;
-    }
+    } catch (err) { if (err && err.name === 'AbortError') return; }
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([metin], { type: 'application/json' }));
     a.download = ad;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+    document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 1500);
   }
 
@@ -523,22 +1129,23 @@
       try {
         const d = JSON.parse(reader.result);
         if (!d || typeof d.years !== 'object') throw new Error();
-        if (!confirm('Yedek yüklenecek ve şu anki liste değiştirilecek. Devam edilsin mi?')) return;
-        data = d;
-        save(); sheetKapat(); render(true);
+        if (!confirm('Yedek yüklenecek ve şu anki kitaplar ile notlar değiştirilecek. Devam edilsin mi?')) return;
+        if (!Array.isArray(d.notes)) d.notes = [];
+        data = d; save(); sheetKapat(); render();
       } catch (err) {
         alert('Bu dosya geçerli bir Cihan Okuyor yedeği değil.');
-      } finally {
-        e.target.value = '';
-      }
+      } finally { e.target.value = ''; }
     };
     reader.readAsText(file);
   });
 
-  // ---------- Başlat ----------
+  // ================= Başlat =================
+  $('wIllus').innerHTML = ILLUS;
+  let gorduMu = false;
+  try { gorduMu = !!localStorage.getItem(WKEY); } catch (e) {}
+  if (!gorduMu) $('welcome').classList.add('open');
   render();
 
-  // İnternetsiz de açılabilmesi için
   if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
     window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
   }

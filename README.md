@@ -1,13 +1,19 @@
 # Cihan Okuyor
 
-Her ay üç kitap okuma hedefini takip etmek için telefona göre tasarlanmış, sade bir uygulama.
+Telefon için tasarlanmış kişisel bir okuma, yazma ve blog uygulaması.
 
-- Üstte yıl (‹ 2026 ›) ve ay şeridi; ekranı sağa sola kaydırarak da ay değiştirebilirsin
-- Her kitapta büyük **Okuyorum** ve **Okudum** butonları (aynı butona tekrar basınca kitap "okunmadı"ya döner)
-- Renkler: 🔴 okunmadı · 🟡 okunuyor · 🟢 okundu
-- Kitabın yanındaki **⋯** ile düzenle / sil
-- Her ay için 3 kitaplık hedef noktaları ve yıllık özet
-- Ana ekrana eklenince uygulama gibi tam ekran açılır, internet olmadan da çalışır
+## Üç bölüm
+
+**Okuma:** Her yıl bir raf. Yeşil kartta 12 ay yan yana durur ve her ay için üç kitap sırtı görünür. Bir aya dokunup o ayın kitaplarını görürsün; ekranı sağa sola kaydırarak da ay değiştirebilirsin.
+- Renkler: kırmızı okunmadı, sarı okunuyor, yeşil okundu
+- Her kitapta **Okuyorum** ve **Okudum** butonları var (aynı butona tekrar basınca kitap "okunmadı"ya döner)
+- Kitabın yanındaki **⋯** ile: bu kitap hakkında yaz, düzenle, sil
+
+**Defter:** Düşüncelerin ve yazı notların. Her not istersen bir kitaba bağlanabilir. Notlar sen yazdıkça kendiliğinden kaydedilir.
+
+**Blog:** Defterde "Blogda yayınla" dediğin notlar burada dergi sayfası gibi görünür.
+
+Sağ alttaki turuncu **+** butonu bulunduğun bölüme göre kitap, not ya da yazı ekler.
 
 ## Dosyalar
 
@@ -18,31 +24,24 @@ sw.js                   internetsiz çalışma
 icons/                  uygulama ikonları
 ```
 
-## 1. GitHub'a yükle
+## GitHub'a yükleme / güncelleme
 
-1. GitHub'da yeni bir depo oluştur, adı `cihan-okuyor` olsun (**Public** seç).
-2. Depoda **Add file → Upload files**'a bas.
-3. Zip'ten çıkan **bütün dosyaları ve `icons` klasörünü** sayfaya sürükle, **Commit changes**'e bas.
-4. **Settings → Pages** bölümüne git. *Source*: **Deploy from a branch**, branch: **main**, klasör: **/ (root)** → **Save**.
-5. 1–2 dakika sonra uygulaman şu adreste açılır:
-   `https://KULLANICI-ADIN.github.io/cihan-okuyor/`
+1. Depoda **Add file → Upload files**'a bas.
+2. Zip'ten çıkan **bütün dosyaları ve `icons` klasörünü** sürükle (eskilerin üstüne yazılır), **Commit changes**'e bas.
+3. İlk kez kuruyorsan: **Settings → Pages** → *Deploy from a branch* → **main** / **(root)** → **Save**.
+4. Adres: `https://KULLANICI-ADIN.github.io/cihan-okuyor/`
 
-## 2. Telefona kur
+Telefonda uygulamayı internete bağlıyken bir iki kez açıp kapatınca yeni sürüm gelir.
 
-**iPhone (Safari ile aç):** alttaki **Paylaş** simgesi → **Ana Ekrana Ekle** → **Ekle**.
+## Telefona kurma
 
-**Android (Chrome ile aç):** sağ üstteki **⋮** menü → **Uygulamayı yükle** (ya da **Ana ekrana ekle**).
-
-Artık ana ekranında "Cihan Okuyor" ikonu olur ve uygulama gibi açılır.
+**iPhone (Safari):** Paylaş → **Ana Ekrana Ekle**.
+**Android (Chrome):** ⋮ menü → **Uygulamayı yükle**.
 
 ## Veriler nerede duruyor?
 
-Kitapların telefonunun kendi hafızasında saklanır, GitHub'a ya da başka bir yere gönderilmez.
+Kitapların ve notların telefonun kendi hafızasında saklanır, hiçbir yere gönderilmez. Eski sürümde eklediğin kitaplar olduğu gibi kalır.
 
-- **iPhone'da önemli:** Ana ekrandaki ikonla açılan uygulamanın verisi, Safari'de açılan sekmeden ayrıdır. Kurduktan sonra hep ana ekrandaki ikondan kullan.
-- Telefon değiştirirken ya da tedbir olarak sağ üstteki **⋯ → Yedek al** ile listeni dosya olarak kaydet. Yeni telefonda **⋯ → Yedekten yükle** ile geri yükleyebilirsin.
-
-## Güncelleme yaparsan
-
-`index.html`'i değiştirip GitHub'a yüklediğinde telefon yeni sürümü internete bağlıyken kendiliğinden alır.
-İkonları değiştirirsen `sw.js` içindeki `cihan-okuyor-v1` yazısını `cihan-okuyor-v2` yap ki telefon eski ikonları bıraksın.
+- **iPhone'da:** Ana ekrandaki ikonla açılan uygulamanın verisi Safari'den ayrıdır; hep ikondan kullan.
+- **Okuma** ekranındaki sağ üst **⋯ → Yedek al** ile kitaplarını ve notlarını tek dosya olarak kaydedebilirsin. **Yedekten yükle** ile geri alırsın.
+- Blog şimdilik yalnızca senin telefonunda görünür. Başkalarının da okuyabilmesi için yayınlama özelliği ayrıca eklenebilir.
