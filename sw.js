@@ -1,6 +1,7 @@
-// Cihan Okuyor: uygulamanın internetsiz de açılmasını sağlar.
+// ReadBook: uygulamanın internetsiz de açılmasını sağlar.
 // Uygulamayı güncellediğinde aşağıdaki sürüm numarasını bir artır (v2, v3...).
-const CACHE = 'cihan-okuyor-v4';
+const CACHE = 'readbook-v1';
+const RESIM = 'readbook-kapaklar';
 const DOSYALAR = [
   './',
   './index.html',
@@ -18,7 +19,7 @@ self.addEventListener('install', e => {
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys()
-      .then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
+      .then(keys => Promise.all(keys.filter(k => k !== CACHE && k !== RESIM).map(k => caches.delete(k))))
       .then(() => self.clients.claim())
   );
 });
@@ -26,27 +27,28 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET') return;
+  const url = new URL(req.url);
 
   // Sayfanın kendisi: önce internetten dene (güncellemeler gelsin), olmazsa kayıtlı kopyayı aç.
   if (req.mode === 'navigate') {
     e.respondWith(
       fetch(req)
-        .then(res => {
-          const kopya = res.clone();
-          caches.open(CACHE).then(c => c.put('./index.html', kopya));
-          return res;
-        })
+        .then(res => { const k = res.clone(); caches.open(CACHE).then(c => c.put('./index.html', k)); return res; })
         .catch(() => caches.match('./index.html'))
     );
     return;
   }
 
-  // Yazı tipleri (Google Fonts): bir kez indirilir, sonra internetsiz de kullanılır.
-  if (req.url.startsWith('https://fonts.googleapis.com') || req.url.startsWith('https://fonts.gstatic.com')) {
+  // Kitap arama sonuçları her zaman internetten gelir.
+  if (url.hostname === 'www.googleapis.com' || url.pathname.endsWith('/search.json')) return;
+
+  // Yazı tipleri ve internetten seçilen kapak resimleri: bir kez indirilir, sonra internetsiz de görünür.
+  const yaziTipi = url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com';
+  if (yaziTipi || (req.destination === 'image' && url.origin !== location.origin)) {
+    const depo = yaziTipi ? CACHE : RESIM;
     e.respondWith(
       caches.match(req).then(kayitli => kayitli || fetch(req).then(res => {
-        const kopya = res.clone();
-        caches.open(CACHE).then(c => c.put(req, kopya));
+        if (res.ok || res.type === 'opaque') { const k = res.clone(); caches.open(depo).then(c => c.put(req, k)); }
         return res;
       }))
     );
