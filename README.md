@@ -4,16 +4,15 @@ Telefon için tasarlanmış kişisel bir okuma, yazma ve blog uygulaması.
 
 ## Üç bölüm
 
-**Okuma:** Her yıl bir raf. Yeşil kartta 12 ay yan yana durur ve her ay için üç kitap sırtı görünür. Bir aya dokunup o ayın kitaplarını görürsün; ekranı sağa sola kaydırarak da ay değiştirebilirsin.
-- Renkler: kırmızı okunmadı, sarı okunuyor, yeşil okundu
+**Okuma:** Açılışta selamlama ve "Şu an okuyorum" kartı var; okuduğun kitabı ve bu ayki hedefini gösterir. Altında yıl, ay seçimi ve o ayın kitapları yer alır. Her kitap kendine özgü bir kapakla görünür.
+- Durum renkleri: kırmızı okunmadı, sarı okunuyor, yeşil okundu
 - Her kitapta **Okuyorum** ve **Okudum** butonları var (aynı butona tekrar basınca kitap "okunmadı"ya döner)
 - Kitabın yanındaki **⋯** ile: bu kitap hakkında yaz, düzenle, sil
+- En altta "Bu yıl" bölümü 12 ayı küçük sütunlarla gösterir
 
-**Defter:** Düşüncelerin ve yazı notların. Her not istersen bir kitaba bağlanabilir. Notlar sen yazdıkça kendiliğinden kaydedilir.
+**Defterim:** Düşüncelerin ve okuma notların. Sağ üstteki **+** ile yeni not açılır, not bir kitaba bağlanabilir, yazdıkça kendiliğinden kaydedilir.
 
-**Blog:** Defterde "Blogda yayınla" dediğin notlar burada dergi sayfası gibi görünür.
-
-Sağ alttaki turuncu **+** butonu bulunduğun bölüme göre kitap, not ya da yazı ekler.
+**Blogum:** Defterde "Blogda yayınla"yı açtığın notlar burada görünür. En son yazı büyük kartta, diğerleri listede durur.
 
 ## Dosyalar
 
@@ -43,5 +42,5 @@ Telefonda uygulamayı internete bağlıyken bir iki kez açıp kapatınca yeni s
 Kitapların ve notların telefonun kendi hafızasında saklanır, hiçbir yere gönderilmez. Eski sürümde eklediğin kitaplar olduğu gibi kalır.
 
 - **iPhone'da:** Ana ekrandaki ikonla açılan uygulamanın verisi Safari'den ayrıdır; hep ikondan kullan.
-- **Okuma** ekranındaki sağ üst **⋯ → Yedek al** ile kitaplarını ve notlarını tek dosya olarak kaydedebilirsin. **Yedekten yükle** ile geri alırsın.
+- **Okuma** ekranındaki sağ üst **⋯** → **Yedek al** ile kitaplarını ve notlarını tek dosya olarak kaydedebilirsin. **Yedekten yükle** ile geri alırsın.
 - Blog şimdilik yalnızca senin telefonunda görünür. Başkalarının da okuyabilmesi için yayınlama özelliği ayrıca eklenebilir.

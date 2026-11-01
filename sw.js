@@ -1,6 +1,6 @@
 // Cihan Okuyor: uygulamanın internetsiz de açılmasını sağlar.
 // Uygulamayı güncellediğinde aşağıdaki sürüm numarasını bir artır (v2, v3...).
-const CACHE = 'cihan-okuyor-v3';
+const CACHE = 'cihan-okuyor-v4';
 const DOSYALAR = [
   './',
   './index.html',
